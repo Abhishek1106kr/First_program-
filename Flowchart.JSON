@@ -1,0 +1,91 @@
+{
+    "title": "DS18B20 Heated Body Detection Flowchart",
+    "nodes": [
+      {
+        "id": "start",
+        "label": "Start",
+        "type": "start"
+      },
+      {
+        "id": "init_sensor",
+        "label": "Initialize DS18B20 Sensor",
+        "type": "process"
+      },
+      {
+        "id": "read_temperature",
+        "label": "Read Temperature",
+        "type": "process"
+      },
+      {
+        "id": "check_threshold",
+        "label": "Is Temperature > Threshold?",
+        "type": "decision"
+      },
+      {
+        "id": "increment_counter",
+        "label": "Increment Body Counter",
+        "type": "process"
+      },
+      {
+        "id": "print_count",
+        "label": "Print Current Count",
+        "type": "process"
+      },
+      {
+        "id": "wait_1s",
+        "label": "Wait 1 Second",
+        "type": "process"
+      },
+      {
+        "id": "no_body_detected",
+        "label": "No Body Detected (Print Temp)",
+        "type": "process"
+      },
+      {
+        "id": "end",
+        "label": "End",
+        "type": "end"
+      }
+    ],
+    "links": [
+      {
+        "from": "start",
+        "to": "init_sensor"
+      },
+      {
+        "from": "init_sensor",
+        "to": "read_temperature"
+      },
+      {
+        "from": "read_temperature",
+        "to": "check_threshold"
+      },
+      {
+        "from": "check_threshold",
+        "to": "increment_counter",
+        "label": "Yes"
+      },
+      {
+        "from": "increment_counter",
+        "to": "print_count"
+      },
+      {
+        "from": "print_count",
+        "to": "wait_1s"
+      },
+      {
+        "from": "wait_1s",
+        "to": "read_temperature"
+      },
+      {
+        "from": "check_threshold",
+        "to": "no_body_detected",
+        "label": "No"
+      },
+      {
+        "from": "no_body_detected",
+        "to": "wait_1s"
+      }
+    ]
+  }
+  
